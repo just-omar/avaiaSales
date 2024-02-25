@@ -1,0 +1,21 @@
+@import 'src/assets/variables';
+
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 140px;
+
+  &__header {
+    letter-spacing: 0.5px;
+    font-size: 12px;
+    line-height: 18px;
+    color: #a0b0b9;
+  }
+
+  &__info {
+    color: $color2;
+    font-size: 14px;
+    line-height: 21px;
+  }
+}

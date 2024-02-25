@@ -1,0 +1,13 @@
+@import 'src/assets/variables';
+
+.showMore {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $color1;
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  color: #ffffff;
+  text-transform: uppercase;
+}

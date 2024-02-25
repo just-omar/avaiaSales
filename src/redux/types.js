@@ -1,0 +1,10 @@
+export const LOAD_TICKETS = 'LOAD_TICKETS';
+export const SHOW_MORE = 'SHOW_MORE';
+export const LOADER_DISPLAY_ON = 'LOADER_DISPLAY_ON';
+export const LOADER_DISPLAY_OFF = 'LOADER_DISPLAY_OFF';
+export const GET_SEARCH_ID = 'GET_SEARCH_ID';
+export const ERROR_ON = 'ERROR_ON';
+export const SELECT_FILTER = 'SELECT_FILTER';
+export const SELECT_ALL_ON = 'SELECT_ALL_ON';
+export const SELECT_ALL_OFF = 'SELECT_ALL_OFF';
+export const CHANGE_TAB = 'CHANGE_TAB';
