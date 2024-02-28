@@ -34,8 +34,12 @@ function TicketList() {
   return (
     <React.Fragment>
       <ul className={styles.ticketList}>
-        {viewArr.map((ticket, index) => (
-          <TicketCard key={index} ticket={ticket} />
+        {viewArr.map((ticket) => (
+          // <TicketCard key={index} ticket={ticket} />
+          <TicketCard
+            key={`${ticket.price}_${ticket.segments[0].duration}_${ticket.segments[1].duration}`}
+            ticket={ticket}
+          />
         ))}
       </ul>
       {viewArr.length ? <ShowMore /> : <span>Рейсов, удовлетворяющих условиям поиска, не найдено</span>}
