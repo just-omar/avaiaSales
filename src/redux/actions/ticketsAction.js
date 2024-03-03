@@ -31,7 +31,7 @@ function onError(err) {
 export function getSearchId() {
   return async (dispatch) => {
     try {
-      const searchId = await aviasalesService.getSearchId().then(async (id) => id);
+      const searchId = await aviasalesService.getSearchId();
       if (searchId) {
         dispatch({
           type: GET_SEARCH_ID,
@@ -47,20 +47,20 @@ export function getSearchId() {
 export function loadTickets(searchId) {
   return async (dispatch) => {
     try {
-      let ticketsArr = [];
       dispatch(loaderOn());
       let stop = false;
       do {
-        ticketsArr = await aviasalesService
-          .getTickets(searchId)
-          .then((res) => res)
-          .catch();
-        if (ticketsArr) {
-          stop = ticketsArr.stop;
-          dispatch({
-            type: LOAD_TICKETS,
-            data: ticketsArr,
-          });
+        try {
+          const ticketsArr = await aviasalesService.getTickets(searchId);
+          if (ticketsArr) {
+            stop = ticketsArr.stop;
+            dispatch({
+              type: LOAD_TICKETS,
+              data: ticketsArr,
+            });
+          }
+        } catch (err) {
+          dispatch(onError(err));
         }
       } while (!stop);
       dispatch(loaderOff());
