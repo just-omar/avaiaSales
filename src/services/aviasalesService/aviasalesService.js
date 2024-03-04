@@ -12,7 +12,7 @@ export default class AviasalesService {
 
   getTickets = async (searchId) => {
     const result = await fetch(`${this._baseUrl}/tickets?searchId=${searchId}`);
-    if (!result.ok) {
+    if (!result.ok && result.status >= 500 && result.status < 600) {
       return false;
     }
     const body = await result.json();

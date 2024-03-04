@@ -58,9 +58,14 @@ export function loadTickets(searchId) {
               type: LOAD_TICKETS,
               data: ticketsArr,
             });
+          } else {
+            throw new Error('Server Error');
           }
         } catch (err) {
-          dispatch(onError(err));
+          if (!err.message.includes('Server')) {
+            dispatch(onError(err));
+            throw err;
+          }
         }
       } while (!stop);
       dispatch(loaderOff());
