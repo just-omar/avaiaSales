@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { sortBy } from 'lodash';
 
 import TicketCard from '../ticketCard/ticketCard.jsx';
 import ShowMore from '../showMore/showMore.jsx';
 
 import styles from './ticketList.module.scss';
+import { filterTickets, sortTickets } from './utils.js';
 
 function TicketList() {
   const { tickets, viewCount } = useSelector((state) => state.TicketsReducer);
@@ -19,23 +19,20 @@ function TicketList() {
     }, []);
   });
 
-  const filterArr = tickets.filter((el) => {
-    return el.segments[0].stops.length === el.segments[1].stops.length && filters.includes(el.segments[0].stops.length);
-  });
+  const filteredTickets = useMemo(() => {
+    return filterTickets(tickets, filters);
+  }, [tickets, filters]);
 
-  const sortArr = sortBy(filterArr, [
-    (o) => {
-      return selectedKey === 'fast' ? o.segments[0].duration + o.segments[1].duration : o.price;
-    },
-  ]);
+  const sortedTickets = useMemo(() => {
+    return sortTickets(filteredTickets, selectedKey);
+  }, [filteredTickets, selectedKey]);
 
-  const viewArr = sortArr.slice(0, viewCount);
+  const viewArr = sortedTickets.slice(0, viewCount);
 
   return (
     <React.Fragment>
       <ul className={styles.ticketList}>
         {viewArr.map((ticket) => (
-          // <TicketCard key={index} ticket={ticket} />
           <TicketCard
             key={`${ticket.price}_${ticket.segments[0].duration}_${ticket.segments[1].duration}`}
             ticket={ticket}
